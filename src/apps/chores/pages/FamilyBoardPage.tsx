@@ -44,7 +44,23 @@ export function FamilyBoardPage() {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1 className={styles.title}>{familyName} 🏠</h1>
+        <div className={styles.topRow}>
+          <div className={styles.kidPills}>
+            {kids.map((kid) => (
+              <button
+                key={kid.id}
+                className={styles.kidPill}
+                style={{ background: kid.color }}
+                onClick={() => navigate(`/apps/chores/${kid.id}`)}
+                title={kid.name}
+              >
+                <span className={styles.pillEmoji}>{kid.avatarEmoji}</span>
+                <span className={styles.pillName}>{kid.name}</span>
+              </button>
+            ))}
+          </div>
+          <h1 className={styles.title}>{familyName} 🏠</h1>
+        </div>
         <div className={styles.tabs}>
           <button
             className={`${styles.tab} ${view === 'week' ? styles.active : ''}`}
