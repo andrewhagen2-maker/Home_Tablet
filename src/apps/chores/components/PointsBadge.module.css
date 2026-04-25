@@ -1,0 +1,13 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #fff9c4;
+  border: 2px solid #f9ca24;
+  border-radius: 24px;
+  padding: 6px 14px;
+}
+
+.star { font-size: 18px; }
+.points { font-size: 22px; font-weight: 800; color: #f9ca24; }
+.label { font-size: 14px; color: #888; font-weight: 600; }

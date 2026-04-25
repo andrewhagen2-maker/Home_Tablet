@@ -1,0 +1,74 @@
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  margin-bottom: 12px;
+  transition: opacity 0.3s;
+  gap: 12px;
+}
+
+.card.done {
+  opacity: 0.5;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.desc {
+  font-size: 13px;
+  color: #888;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.pts {
+  font-size: 15px;
+  font-weight: 700;
+  color: #f9ca24;
+  white-space: nowrap;
+}
+
+.check {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 3px solid #6EE7B7;
+  background: white;
+  font-size: 24px;
+  font-weight: 700;
+  color: #27ae60;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check:active:not(:disabled) {
+  transform: scale(0.88);
+}
+
+.check.checked {
+  background: #6EE7B7;
+  border-color: #6EE7B7;
+  cursor: default;
+}

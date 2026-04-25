@@ -1,0 +1,50 @@
+.page {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #f0fff4 0%, #e0f2fe 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px 32px;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 40px;
+}
+
+.empty {
+  text-align: center;
+  color: #888;
+  margin-bottom: 24px;
+}
+
+.parentBtn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(255,255,255,0.9);
+  border: 2px solid #e0e0e0;
+  border-radius: 24px;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  transition: transform 0.1s;
+}
+
+.parentBtn:active { transform: scale(0.95); }

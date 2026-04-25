@@ -1,0 +1,38 @@
+.avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border: 3px solid var(--kid-color);
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 16px;
+}
+
+button.avatar:active {
+  transform: scale(0.93);
+}
+
+.emoji {
+  line-height: 1;
+}
+
+.name {
+  font-weight: 700;
+  color: #222;
+}
+
+/* Sizes */
+.sm .emoji { font-size: 28px; }
+.sm .name { font-size: 13px; }
+.sm { padding: 10px 14px; }
+
+.md .emoji { font-size: 48px; }
+.md .name { font-size: 16px; }
+
+.lg .emoji { font-size: 72px; }
+.lg .name { font-size: 20px; }
+.lg { padding: 24px; border-radius: 28px; }

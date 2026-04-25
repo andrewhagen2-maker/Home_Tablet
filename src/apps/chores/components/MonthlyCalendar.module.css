@@ -1,0 +1,99 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 12px;
+}
+
+.monthTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a2e;
+  min-width: 160px;
+  text-align: center;
+}
+
+.nav {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s;
+}
+
+.nav:active { background: #f0f0f0; }
+
+.dayHeaders {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+}
+
+.dayLabel {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #aaa;
+  padding: 4px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  font-size: 15px;
+  cursor: pointer;
+  position: relative;
+  gap: 2px;
+  transition: background 0.1s;
+}
+
+.cell:active { background: #f0f0f0; }
+
+.cell.today { background: #eff6ff; font-weight: 800; color: #2563eb; }
+.cell.selected { background: #6EE7B7; }
+.cell.selected.today { background: #34d399; }
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fbbf24;
+}
+
+.dot.dotDone { background: #6EE7B7; }
+
+.dayDetail {
+  margin-top: 20px;
+}
+
+.dayDetail h3 {
+  font-size: 18px;
+  margin: 0 0 12px;
+  color: #1a1a2e;
+}
+
+.freeDay {
+  text-align: center;
+  color: #aaa;
+  margin-top: 20px;
+  font-size: 16px;
+}
