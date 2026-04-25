@@ -1,31 +1,9 @@
 import type { Chore } from '../../../store/storage';
+import { isDueOn, getWeekDates } from '../../../utils/choreUtils';
 import { ChoreCard } from './ChoreCard';
 import styles from './WeeklyGrid.module.css';
 
 const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-function getWeekDates(): Date[] {
-  const today = new Date();
-  const monday = new Date(today);
-  monday.setDate(today.getDate() - ((today.getDay() + 6) % 7));
-  return Array.from({ length: 7 }, (_, i) => {
-    const d = new Date(monday);
-    d.setDate(monday.getDate() + i);
-    return d;
-  });
-}
-
-function isDueOn(chore: Chore, date: Date): boolean {
-  const dow = date.getDay();
-  if (chore.recurrence === 'daily') return true;
-  if (chore.recurrence === 'weekly') return chore.weekdays?.includes(dow) ?? false;
-  if (chore.recurrence === 'monthly') return chore.monthDay === date.getDate();
-  if (chore.recurrence === 'once') {
-    const created = new Date(chore.createdAt).toDateString();
-    return created === date.toDateString();
-  }
-  return false;
-}
 
 interface Props {
   chores: Chore[];

@@ -1,0 +1,124 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 24px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 24px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+.label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.input:focus { border-color: #93C5FD; }
+
+.emojiGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.emojiBtn {
+  font-size: 22px;
+  padding: 6px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f5f5f5;
+  cursor: pointer;
+  transition: border-color 0.1s;
+}
+
+.emojiSelected {
+  border-color: #6366f1;
+  background: #ede9fe;
+}
+
+.colorRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.colorBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.1s, transform 0.1s;
+}
+
+.colorBtn:active { transform: scale(0.9); }
+
+.colorSelected {
+  border-color: #1a1a2e;
+  transform: scale(1.15);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.saveBtn {
+  flex: 1;
+  padding: 12px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.1s;
+}
+
+.saveBtn:active { opacity: 0.85; }
+
+.cancelBtn {
+  flex: 1;
+  padding: 12px;
+  background: #f0f0f0;
+  color: #444;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}

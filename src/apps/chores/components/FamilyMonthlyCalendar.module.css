@@ -1,0 +1,162 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.nav {
+  background: rgba(255,255,255,0.8);
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s;
+}
+
+.nav:hover { background: #fff; }
+
+.monthTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a2e;
+  min-width: 180px;
+  text-align: center;
+}
+
+.dayHeaders {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.dayLabel {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #999;
+  padding: 4px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background: rgba(255,255,255,0.5);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.1s, border-color 0.1s;
+  padding: 4px 2px;
+}
+
+.cell:hover { background: rgba(255,255,255,0.9); }
+
+.today {
+  background: #ede9fe;
+  border-color: #6366f1;
+  font-weight: 700;
+  color: #6366f1;
+}
+
+.selected {
+  background: #fff;
+  border-color: #6366f1;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.2);
+}
+
+.dots {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Day detail panel */
+.dayDetail {
+  background: rgba(255,255,255,0.9);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 8px;
+}
+
+.detailTitle {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: #1a1a2e;
+}
+
+.kidSection {
+  margin-bottom: 14px;
+}
+
+.kidHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  padding-left: 8px;
+  border-left: 3px solid #e0e0e0;
+}
+
+.kidName {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  padding: 2px 0;
+}
+
+.kidName:hover { text-decoration: underline; }
+
+.editBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  opacity: 0.6;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: opacity 0.1s;
+}
+
+.editBtn:hover { opacity: 1; }
+
+.freeDay {
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
+  padding: 16px 0;
+}

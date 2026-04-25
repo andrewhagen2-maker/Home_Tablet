@@ -48,3 +48,31 @@
 }
 
 .parentBtn:active { transform: scale(0.95); }
+
+.kidWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.editBtn {
+  position: absolute;
+  bottom: 36px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.9);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: transform 0.1s;
+  padding: 0;
+  line-height: 1;
+}
+
+.editBtn:active { transform: scale(0.9); }

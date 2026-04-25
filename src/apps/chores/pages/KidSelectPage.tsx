@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { useKids } from '../../../hooks/useKids';
 import { KidAvatar } from '../components/KidAvatar';
 import { PinGate } from '../../../components/PinGate';
+import { KidEditModal } from '../components/KidEditModal';
+import type { Kid } from '../../../store/storage';
 import styles from './KidSelectPage.module.css';
 
 export function KidSelectPage() {
   const navigate = useNavigate();
-  const { kids } = useKids();
+  const { kids, updateKid } = useKids();
   const [showPin, setShowPin] = useState(false);
+  const [editingKid, setEditingKid] = useState<Kid | null>(null);
 
   return (
     <div className={styles.page}>
@@ -23,14 +26,20 @@ export function KidSelectPage() {
       ) : (
         <div className={styles.grid}>
           {kids.map((kid) => (
-            <KidAvatar
-              key={kid.id}
-              emoji={kid.avatarEmoji}
-              name={kid.name}
-              color={kid.color}
-              size="lg"
-              onClick={() => navigate(`/apps/chores/${kid.id}`)}
-            />
+            <div key={kid.id} className={styles.kidWrapper}>
+              <KidAvatar
+                emoji={kid.avatarEmoji}
+                name={kid.name}
+                color={kid.color}
+                size="lg"
+                onClick={() => navigate(`/apps/chores/${kid.id}`)}
+              />
+              <button
+                className={styles.editBtn}
+                onClick={(e) => { e.stopPropagation(); setEditingKid(kid); }}
+                title="Edit profile"
+              >✏️</button>
+            </div>
           ))}
         </div>
       )}
@@ -41,6 +50,13 @@ export function KidSelectPage() {
         <PinGate
           onSuccess={() => { setShowPin(false); navigate('/apps/chores/parent'); }}
           onCancel={() => setShowPin(false)}
+        />
+      )}
+      {editingKid && (
+        <KidEditModal
+          kid={editingKid}
+          onSave={(data) => { updateKid(editingKid.id, data); setEditingKid(null); }}
+          onCancel={() => setEditingKid(null)}
         />
       )}
     </div>

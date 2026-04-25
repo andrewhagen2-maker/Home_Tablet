@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Chore, ChoreCompletion } from '../../../store/storage';
+import { isDueOn, toDateStr } from '../../../utils/choreUtils';
 import { ChoreCard } from './ChoreCard';
 import styles from './MonthlyCalendar.module.css';
 
@@ -18,17 +19,6 @@ function firstDayOfMonth(year: number, month: number) {
   return new Date(year, month, 1).getDay();
 }
 
-function isDueOnDate(chore: Chore, date: Date): boolean {
-  const dow = date.getDay();
-  if (chore.recurrence === 'daily') return true;
-  if (chore.recurrence === 'weekly') return chore.weekdays?.includes(dow) ?? false;
-  if (chore.recurrence === 'monthly') return chore.monthDay === date.getDate();
-  if (chore.recurrence === 'once') {
-    return new Date(chore.createdAt).toDateString() === date.toDateString();
-  }
-  return false;
-}
-
 export function MonthlyCalendar({ chores, kidId, completions, onComplete }: Props) {
   const now = new Date();
   const [year, setYear] = useState(now.getFullYear());
@@ -37,7 +27,7 @@ export function MonthlyCalendar({ chores, kidId, completions, onComplete }: Prop
 
   const totalDays = daysInMonth(year, month);
   const startDow = firstDayOfMonth(year, month);
-  const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+  const todayKey = toDateStr(now);
 
   const completedDates = new Set(completions.map((c) => c.completedDate));
   const completedOnDate = (dateStr: string) =>
@@ -47,10 +37,8 @@ export function MonthlyCalendar({ chores, kidId, completions, onComplete }: Prop
   const nextMonth = () => { if (month === 11) { setMonth(0); setYear(y => y + 1); } else setMonth(m => m + 1); setSelectedDay(null); };
 
   const selectedDate = selectedDay ? new Date(year, month, selectedDay) : null;
-  const selectedDateStr = selectedDate
-    ? `${year}-${String(month + 1).padStart(2,'0')}-${String(selectedDay).padStart(2,'0')}`
-    : '';
-  const selectedDueChores = selectedDate ? chores.filter((c) => isDueOnDate(c, selectedDate)) : [];
+  const selectedDateStr = selectedDate ? toDateStr(selectedDate) : '';
+  const selectedDueChores = selectedDate ? chores.filter((c) => isDueOn(c, selectedDate)) : [];
   const selectedCompleted = new Set(completedOnDate(selectedDateStr));
   const isSelectedToday = selectedDateStr === todayKey;
 
@@ -72,9 +60,9 @@ export function MonthlyCalendar({ chores, kidId, completions, onComplete }: Prop
         {Array.from({ length: startDow }, (_, i) => <div key={`e${i}`} />)}
         {Array.from({ length: totalDays }, (_, i) => {
           const day = i + 1;
-          const dateStr = `${year}-${String(month + 1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
           const date = new Date(year, month, day);
-          const due = chores.filter((c) => isDueOnDate(c, date));
+          const dateStr = toDateStr(date);
+          const due = chores.filter((c) => isDueOn(c, date));
           const allDone = due.length > 0 && due.every((c) => completedDates.has(dateStr) && completedOnDate(dateStr).includes(c.id));
           const isToday = dateStr === todayKey;
           const isSelected = day === selectedDay;
