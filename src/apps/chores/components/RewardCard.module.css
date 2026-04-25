@@ -46,3 +46,24 @@
   color: #e67e22;
   font-weight: 600;
 }
+
+.progressTrack {
+  height: 8px;
+  border-radius: 999px;
+  background: #e8e8ee;
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  transition: width 0.4s ease;
+}
+
+.progressText {
+  font-size: 12px;
+  color: #999;
+  margin-top: 2px;
+}

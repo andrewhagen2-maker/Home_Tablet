@@ -41,6 +41,7 @@ export interface Reward {
   description?: string;
   imageEmoji?: string;
   active: boolean;
+  assignedKidIds?: string[];
 }
 
 export interface Redemption {

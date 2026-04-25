@@ -240,7 +240,9 @@ function RewardsTab({ rewards, redemptions, kids, onAdd, onUpdate, onDelete, onA
           <span className={styles.itemIcon}>{r.imageEmoji ?? '🎁'}</span>
           <div className={styles.itemInfo}>
             <span className={styles.itemTitle}>{r.title}</span>
-            <span className={styles.itemSub}>{r.pointCost}⭐</span>
+            <span className={styles.itemSub}>
+              {r.pointCost}⭐ · {!r.assignedKidIds || r.assignedKidIds.length === 0 ? 'Everyone' : r.assignedKidIds.map((id) => kids.find((k) => k.id === id)?.name ?? id).join(', ')}
+            </span>
           </div>
           <button className={styles.editBtn} onClick={() => setEditing(r)}>Edit</button>
           <button className={styles.deleteBtn} onClick={() => { if (confirm(`Delete "${r.title}"?`)) onDelete(r.id); }}>✕</button>
@@ -249,6 +251,7 @@ function RewardsTab({ rewards, redemptions, kids, onAdd, onUpdate, onDelete, onA
       {(adding || editing) && (
         <RewardForm
           initial={editing ?? undefined}
+          kids={kids}
           onSave={(data) => { editing ? onUpdate(editing.id, data) : onAdd(data); setEditing(null); setAdding(false); }}
           onCancel={() => { setEditing(null); setAdding(false); }}
         />
@@ -257,11 +260,16 @@ function RewardsTab({ rewards, redemptions, kids, onAdd, onUpdate, onDelete, onA
   );
 }
 
-function RewardForm({ initial, onSave, onCancel }: { initial?: Reward; onSave: (d: Omit<Reward,'id'|'active'>) => void; onCancel: () => void }) {
+function RewardForm({ initial, kids, onSave, onCancel }: { initial?: Reward; kids: Kid[]; onSave: (d: Omit<Reward,'id'|'active'>) => void; onCancel: () => void }) {
   const [title, setTitle] = useState(initial?.title ?? '');
   const [desc, setDesc] = useState(initial?.description ?? '');
   const [cost, setCost] = useState(initial?.pointCost ?? 20);
   const [emoji, setEmoji] = useState(initial?.imageEmoji ?? '🎁');
+  const [assignedKidIds, setAssignedKidIds] = useState<string[]>(initial?.assignedKidIds ?? []);
+
+  const toggleKid = (id: string) =>
+    setAssignedKidIds((prev) => prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]);
+
   return (
     <div className={styles.formCard}>
       <h3>{initial ? 'Edit Reward' : 'Add Reward'}</h3>
@@ -273,8 +281,17 @@ function RewardForm({ initial, onSave, onCancel }: { initial?: Reward; onSave: (
       <input className={styles.input} value={emoji} onChange={(e) => setEmoji(e.target.value)} maxLength={2} style={{ width: 80, textAlign: 'center', fontSize: 24 }} />
       <label>Point cost</label>
       <input className={styles.input} type="number" min={1} value={cost} onChange={(e) => setCost(Number(e.target.value))} />
+      <label>Assign to</label>
+      <div className={styles.kidsRow}>
+        <button className={`${styles.kidChip} ${assignedKidIds.length === 0 ? styles.kidSelected : ''}`} onClick={() => setAssignedKidIds([])}>Everyone</button>
+        {kids.map((k) => (
+          <button key={k.id} className={`${styles.kidChip} ${assignedKidIds.includes(k.id) ? styles.kidSelected : ''}`} onClick={() => { if (assignedKidIds.length === 0) setAssignedKidIds([k.id]); else toggleKid(k.id); }}>
+            {k.avatarEmoji} {k.name}
+          </button>
+        ))}
+      </div>
       <div className={styles.formActions}>
-        <button className={styles.saveBtn} onClick={() => title.trim() && onSave({ title: title.trim(), description: desc.trim() || undefined, pointCost: cost, imageEmoji: emoji })}>Save</button>
+        <button className={styles.saveBtn} onClick={() => title.trim() && onSave({ title: title.trim(), description: desc.trim() || undefined, pointCost: cost, imageEmoji: emoji, assignedKidIds })}>Save</button>
         <button className={styles.cancelBtn} onClick={onCancel}>Cancel</button>
       </div>
     </div>

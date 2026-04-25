@@ -16,7 +16,11 @@ export function RewardsPage() {
   if (!kid || !kidId) return <p>Kid not found.</p>;
 
   const availablePoints = storage.getAvailablePoints(kidId);
-  const activeRewards = rewards.filter((r) => r.active);
+  const activeRewards = rewards.filter(
+    (r) =>
+      r.active &&
+      (!r.assignedKidIds || r.assignedKidIds.length === 0 || r.assignedKidIds.includes(kidId))
+  );
   const pendingMap = new Map(
     redemptions
       .filter((r) => r.kidId === kidId && !r.markedByParent)

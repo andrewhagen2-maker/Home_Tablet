@@ -12,6 +12,7 @@ interface Props {
 export function RewardCard({ reward, availablePoints, pendingRedemption, onRedeem }: Props) {
   const canAfford = availablePoints >= reward.pointCost;
   const isPending = !!pendingRedemption;
+  const progress = Math.min(availablePoints / reward.pointCost, 1);
 
   return (
     <div className={`${styles.card} ${!canAfford ? styles.dim : ''}`}>
@@ -20,6 +21,14 @@ export function RewardCard({ reward, availablePoints, pendingRedemption, onRedee
         <span className={styles.title}>{reward.title}</span>
         {reward.description && <span className={styles.desc}>{reward.description}</span>}
         <span className={styles.cost}>⭐ {reward.pointCost} pts</span>
+        {!canAfford && (
+          <>
+            <div className={styles.progressTrack}>
+              <div className={styles.progressFill} style={{ width: `${progress * 100}%` }} />
+            </div>
+            <span className={styles.progressText}>{availablePoints} / {reward.pointCost} pts</span>
+          </>
+        )}
       </div>
       <div className={styles.action}>
         {isPending ? (
